@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:viren_demo/Screen/HomePage.dart';
-import 'package:viren_demo/Screen/OtpPage.dart';
-import 'package:viren_demo/Constant/Constant.dart';
+import 'package:provider/provider.dart';
+import 'services/provider_registry.dart';
+import 'utils/theme.dart';
+import 'views/home.dart';
 
-void main() => runApp(new MaterialApp(
-  home: new HomePage(),
+void main() {
+  runApp(MyApp());
+}
 
-  debugShowCheckedModeBanner: false,
-    theme: new ThemeData(
-      primaryColorDark: Colors.brown,
-      primaryColor: Colors.blueAccent,
-    ),
-
-    routes: <String, WidgetBuilder>{
-      HOME_SCREEN: (BuildContext context) => new HomePage(),
-      OTP_SCREEN: (BuildContext context) => new OtpPage(),
-    }
-
-));
-
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: registerProviders,
+      child: MaterialApp(
+        title: 'OTP Example',
+        debugShowCheckedModeBanner: false,
+        theme: themeData(context),
+        home: HomePage(),
+      ),
+    );
+  }
+}
